@@ -22,7 +22,7 @@ export default function Signup() {
         console.log("Login success", response.data);
         toast.success("Login success");
         setLoading(false)
-        // router.push("/profile");
+        router.push("/login");
     } catch (error:any) {
         console.log("Login failed", error.message);
         toast.error(error.message);

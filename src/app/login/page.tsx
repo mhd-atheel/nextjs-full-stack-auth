@@ -21,7 +21,7 @@ export default function Home() {
         console.log("Login success", response.data);
         toast.success("Login success");
         setLoading(false)
-        // router.push("/profile");
+        router.push("/profile");
     } catch (error:any) {
         console.log("Login failed", error.message);
         toast.error(error.message);

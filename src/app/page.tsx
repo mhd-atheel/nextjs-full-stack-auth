@@ -1,67 +1,20 @@
-'use client'
-import axios from 'axios'
-import Image from 'next/image'
-import {useRouter} from 'next/navigation'
-import React , {useEffect} from 'react'
-import  Toast, { toast }  from 'react-hot-toast'
+"use client";
+import axios from "axios";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+
 
 export default function Home() {
   const router = useRouter()
-  const [data,setData] = React.useState({
-      email:"",
-      password:""
-  })
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-
-  const handleSubmit = async () => {
-    try {
-        setLoading(true)
-        const response = await axios.post("/api/users/signup", data);
-        console.log("Login success", response.data);
-        toast.success("Login success");
-        setLoading(false)
-        // router.push("/profile");
-    } catch (error:any) {
-        console.log("Login failed", error.message);
-        toast.error(error.message);
-    }finally{
-      setButtonDisabled(false)
-    }
-}
-useEffect(() => {
-  if(data.email.length > 0 && data.password.length > 0) {
-      setButtonDisabled(false);
-      setLoading(false)
-  } else{
-      setButtonDisabled(true);
-  
-  }
-}, [data]);
 
 
   return (
-    <div className='container md:mx-auto px-4 flex items-center justify-center h-screen flex-col' >
-      {data.email}
+    <div className="container md:mx-auto px-4 bg-blend-lighten flex items-center justify-center h-screen flex-col">
 
-      <input className='rounded-lg p-4 mt-4 w-80 text-black'
-       type="text " 
-       placeholder='Email'
-       value={data.email}
-       onChange={(e)=>setData({...data,email:e.target.value})}
-       />
-      
-      <input className='rounded-lg p-4 mt-4 w-80 text-black' 
-      type="text"
-      placeholder='Password'
-      value={data.password}
-      onChange={(e)=>setData({...data,password:e.target.value})}
-       />
+      <button onClick={(e) => router.push("/login")} className="bg-orange-500 p-5 rounded-lg" >
+        <h1 className="text-center text-white font-bold text-4xl ">HOME</h1></button>
 
-
-      <button className='bg-orange-500 p-4 mt-4 rounded-lg w-80 font-bold' disabled ={buttonDisabled} onClick={handleSubmit}>
-        {loading ? "Loading.." : "Register"}
-        </button>
     </div>
-  )
+  );
 }
